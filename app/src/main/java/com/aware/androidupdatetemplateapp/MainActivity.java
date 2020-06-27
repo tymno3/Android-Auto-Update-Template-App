@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkForUpdates(View view) {
         final TextView textView = (TextView) findViewById(R.id.text);
-        String localhost = "http://10.0.2.2:5000/";
+        // todo(tding): Supply real username and real current version
+        String localhost = "http://10.0.2.2:5000/version/?user=Tim&current_version=1";
         JsonObjectRequest stringRequest =
                 new JsonObjectRequest(Request.Method.GET, localhost, null,
                         new Response.Listener<JSONObject>() {
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        textView.setText("That didn't work!");
+                        textView.setText("That didn't work!"+ error.toString());
+
                     }
                 });
         queue.add(stringRequest);
